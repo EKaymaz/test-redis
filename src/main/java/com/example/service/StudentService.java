@@ -16,8 +16,12 @@ public class StudentService {
         this.studentRepositoryImpl = studentRepositoryImpl;
     }
 
-    public void save(Student student){
+    public void save(Student student) {
         this.studentRepositoryImpl.saveStudent(student);
+    }
+
+    public Student getOneById(String id) {
+        return this.studentRepositoryImpl.findStudent(id);
     }
 
 }
