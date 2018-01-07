@@ -6,9 +6,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
-/**
- * Created by erdem on 17.12.2017.
- */
 @RestController
 @RequestMapping("/health")
 public class HealthController {
