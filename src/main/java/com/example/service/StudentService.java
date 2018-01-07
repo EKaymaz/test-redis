@@ -1,7 +1,7 @@
 package com.example.service;
 
 import com.example.domain.Student;
-import com.example.repository.StudentRepositoryImpl;
+import com.example.repository.StudentRepository;
 import org.springframework.stereotype.Service;
 
 /**
@@ -10,18 +10,18 @@ import org.springframework.stereotype.Service;
 @Service
 public class StudentService {
 
-    private StudentRepositoryImpl studentRepositoryImpl;
+    private StudentRepository studentRepository;
 
-    public StudentService(StudentRepositoryImpl studentRepositoryImpl) {
-        this.studentRepositoryImpl = studentRepositoryImpl;
+    public StudentService(StudentRepository studentRepository) {
+        this.studentRepository = studentRepository;
     }
 
     public void save(Student student) {
-        this.studentRepositoryImpl.saveStudent(student);
+        this.studentRepository.save(student);
     }
 
     public Student getOneById(String id) {
-        return this.studentRepositoryImpl.findStudent(id);
+        return this.studentRepository.findOne(id);
     }
 
 }

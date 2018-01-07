@@ -1,10 +1,11 @@
-version: '3'
-services:
-  web:
-    build: .
-    ports:
-     - "8080:8080"
-  redis:
-    image: "redis:alpine"
-    ports:
-     - "6379:6379"
+spring:
+    jpa:
+        database: MYSQL
+        hibernate:
+            ddl-auto: validate
+
+    datasource:
+        url: jdbc:mysql://mysql:3306/demo
+        username: demo_user
+        password: demo_pass
+        driver-class-name: com.mysql.jdbc.Driver
