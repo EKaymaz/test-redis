@@ -5,10 +5,9 @@ import com.example.service.StudentService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 @RestController
 @RequestMapping("/action")
@@ -17,25 +16,20 @@ public class TestController {
     @Autowired
     private StudentService studentService;
 
-    @RequestMapping(value = "/add", method = RequestMethod.GET)
-    public ResponseEntity<Student> addDataToRedis() {
-        Student s = new Student();
-        s.setName("testStudent");
-        s.setGender(Student.Gender.MALE);
-        s.setGrade(100);
-        s.setId("1");
-        this.studentService.save(s);
-        return new ResponseEntity<Student>(s, HttpStatus.OK);
+    @RequestMapping(method = RequestMethod.POST)
+    public ResponseEntity<Student> addStudent(@RequestBody Student student) {
+        this.studentService.add(student);
+        return new ResponseEntity<Student>(student, HttpStatus.OK);
     }
 
     @RequestMapping(value = "/list", method = RequestMethod.GET)
-    public ResponseEntity<String> showDataFromRedis() {
-        return new ResponseEntity<String>("erdem", HttpStatus.OK);
+    public ResponseEntity<List<Student>> getAll() {
+        return new ResponseEntity<List<Student>>(this.studentService.findAll(), HttpStatus.OK);
     }
 
     @RequestMapping(value = "/{id}", method = RequestMethod.GET)
-    public ResponseEntity<Student> showDataFromRedis(@PathVariable(value = "id") String id) {
-        Student st = studentService.getOneById(id);
+    public ResponseEntity<Student> getOne(@PathVariable(value = "id") String id) {
+        Student st = studentService.findOne(id);
         return new ResponseEntity<Student>(st, HttpStatus.OK);
     }
 }
