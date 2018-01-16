@@ -26,7 +26,9 @@ public class DemoApplication {
 
     @Bean
     JedisConnectionFactory jedisConnectionFactory() {
-        return new JedisConnectionFactory();
+        JedisConnectionFactory factory = new JedisConnectionFactory();
+        factory.setHostName("redis");
+        return factory;
     }
 
     @Bean
